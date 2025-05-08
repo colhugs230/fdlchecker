@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+import { Command } from 'commander';
+import { validateFdlFile } from '../src/validator.js';
+
+const program = new Command();
+program
+  .name('ascfdl-validate')
+  .description('Validate ASC-FDL JSON files with JSON-Schema plus logical checks')
+  .argument('<fdl-files...>', 'one or more FDL JSON files')
+  .parse(process.argv);
+
+let total = 0;
+for (const file of program.args) total += await validateFdlFile(file);
+process.exit(total);
