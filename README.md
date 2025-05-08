@@ -1,2 +1,2 @@
 # fdlchecker
-A node package for checking the validity of ASC FDL file's schemas. 
+A node package for checking the validity of ASC FDL file's schema. 
