@@ -20,10 +20,10 @@ Validate **ASC Framing Decision List (FDL)** files against the official JSO
 
 ```bash
 # Local project usage
-npm install --save-dev fdl-checker
+npm install --save-dev fdlchecker
 
 # Global CLI (optional)
-npm install --global fdl-checker
+npm install --global fdlchecker
 ```
 
 ## CLI usage
