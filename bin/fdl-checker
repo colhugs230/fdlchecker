@@ -11,4 +11,11 @@ program
 
 let total = 0;
 for (const file of program.args) total += await validateFdlFile(file);
+
+// Log message
+if (total == 0) {
+  console.log("\nFDL file is valid, no errors found! Happy day!\n")
+} else {
+  console.error(`\nFDL file is NOT valid. ${total} errors found.\n`)
+}
 process.exit(total);
