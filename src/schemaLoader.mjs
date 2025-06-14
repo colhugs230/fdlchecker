@@ -2,8 +2,8 @@
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 
-import v10 from '../schemas/ascfdl.schema-1.0.json' assert { type: 'json' };
-import v11 from '../schemas/ascfdl.schema-1.1.json' assert { type: 'json' };
+import v10 from '../schemas/ascfdl.schema-1.0.json' with { type: 'json' };
+import v11 from '../schemas/ascfdl.schema-1.1.json' with { type: 'json' };
 
 const ajv = new Ajv2020({ allErrors: true, strict: false, verbose: true });
 addFormats(ajv);
