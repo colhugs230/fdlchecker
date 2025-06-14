@@ -2,8 +2,8 @@
 import fs from 'node:fs/promises';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
-import { validateIdTree } from './idTree.js';
-import { pickValidator } from './schemaLoader.js';
+import { validateIdTree } from './idTree.mjs';
+import { pickValidator } from './schemaLoader.mjs';
 
 // Helpers
 function formatAjvError(err) {

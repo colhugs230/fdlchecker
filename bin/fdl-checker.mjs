@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { validateFdlFile } from '../src/validator.js';
+import { validateFdlFile } from '../src/validator.mjs';
 
 const program = new Command();
 program
