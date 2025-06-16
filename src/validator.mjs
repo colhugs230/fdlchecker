@@ -1,4 +1,4 @@
-// src/validator.js
+// src/validator.mjs
 import fs from 'node:fs/promises';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
