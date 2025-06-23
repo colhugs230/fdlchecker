@@ -35,8 +35,8 @@ fdl-checker <file.fdl> [more‑files...]
 
 ## Example
 ```bash
-$ fdl-checker tests/bad-v1.0.fdl
-===== Validating 'tests/bad-v1.0.fdl' =====
+$ fdl-checker tests/invalid_v1.0.fdl
+===== Validating 'tests/invalid_v1.0.fdl' =====
 /contexts/0/canvases/0/id: string "e9709e42‑…" length must not exceed 32 characters
 /contexts/0/canvases/0/id: value "e9709e42‑…" must match pattern ^[A-Za-z0-9_]+$
 ID Tree Error: Context (DXL2) > Canvas e9709e42‑… > Framing Decision 2‑1Framing: Framing Intent ID 2‑1Framing not in framing_intents
@@ -44,11 +44,14 @@ ID Tree Error: Context (DXL2) > Canvas e9709e42‑… > Framing Decision 2‑1Fr
 
 ## Programmatic API
 ```javascript
-import { validateFdlFile } from 'fdl-checker';
+import { validateFdlObject } from 'fdl-checker';
 
-const errors = await validateFdlFile('path/to/shot.fdl', { verbose: false });
-if (errors) {
-  console.error(`${errors} validation errors`);
+// A valid FDL converted to a javascript object
+const fdlObject = {};
+
+const {version, errors} = validateFdlObject(fdlObject, { verbose: false });;
+if (errors?.length) {
+  console.error(`Failed validation for FDL version ${version.major}.${version.minor} with ${errors.length} validation errors`);
   process.exit(1);
 }
 ```

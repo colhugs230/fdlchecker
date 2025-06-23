@@ -1,0 +1,110 @@
+{
+  "uuid": "68b0112c-9049-40ec-84af-1ab86c61b164",
+  "version": {
+    "major": 1,
+    "minor": 1
+  },
+  "fdl_creator": "Light Iron Galixy",
+  "default_framing_intent": "CnFgHKm7",
+  "framing_intents": [
+    {
+      "label": "178-100 Framing",
+      "id": "CnFgHKm7",
+      "aspect_ratio": {
+        "width": 178,
+        "height": 100
+      },
+      "protection": 0.1
+    }
+  ],
+  "contexts": [
+    {
+      "label": "DXL2",
+      "context_creator": "Light Iron Galixy",
+      "canvases": [
+        {
+          "label": "6K WS",
+          "id": "ufeYrn3M",
+          "source_canvas_id": "ufeYrn3M",
+          "dimensions": {
+            "width": 6144,
+            "height": 2592
+          },
+          "effective_dimensions": {
+            "width": 6144,
+            "height": 2592
+          },
+          "effective_anchor_point": {
+            "x": 0,
+            "y": 0
+          },
+          "anamorphic_squeeze": 1,
+          "framing_decisions": [
+            {
+              "label": "178-100Framing",
+              "id": "ufeYrn3M-CnFgHKm7",
+              "framing_intent_id": "CnFgHKm7",
+              "dimensions": {
+                "width": 4152.384,
+                "height": 2332.8
+              },
+              "anchor_point": {
+                "x": 995.808,
+                "y": 129.5999999999999
+              },
+              "protection_dimensions": {
+                "width": 4613.76,
+                "height": 2592
+              },
+              "protection_anchor_point": {
+                "x": 765.1199999999999,
+                "y": 0
+              }
+            }
+          ]
+        },
+        {
+          "label": "8K WS",
+          "id": "CRPGNuxW",
+          "source_canvas_id": "CRPGNuxW",
+          "dimensions": {
+            "width": 8192,
+            "height": 3456
+          },
+          "effective_dimensions": {
+            "width": 8192,
+            "height": 3456
+          },
+          "effective_anchor_point": {
+            "x": 0,
+            "y": 0
+          },
+          "anamorphic_squeeze": 1,
+          "framing_decisions": [
+            {
+              "label": "178-100Framing",
+              "id": "CRPGNuxW-CnFgHKm7",
+              "framing_intent_id": "CnFgHKm7",
+              "dimensions": {
+                "width": 5536.512000000001,
+                "height": 3110.4
+              },
+              "anchor_point": {
+                "x": 1327.7439999999997,
+                "y": 172.79999999999995
+              },
+              "protection_dimensions": {
+                "width": 6151.68,
+                "height": 3456
+              },
+              "protection_anchor_point": {
+                "x": 1020.1599999999999,
+                "y": 0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,4 @@
-// src/validator.mjs
-import fs from 'node:fs/promises';
+// src/validator.js
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { validateIdTree } from './idTree.mjs';
@@ -10,69 +9,92 @@ function formatAjvError(err) {
   const path  = err.instancePath || '/';
   const value = JSON.stringify(err.data);
 
+  // Make errors from Ajv "pretty"
   switch (err.keyword) {
     case 'const':
-      // { allowedValue }
       return `${path}: value ${value} must equal ${JSON.stringify(err.params.allowedValue)}`;
-
     case 'pattern':
-      // { pattern }
       return `${path}: value ${value} must match pattern ${err.params.pattern}`;
-
     case 'type':
-      // { type }
       return `${path}: value ${value} must be of type ${err.params.type}`;
-
     case 'maxLength':
     case 'minLength':
-      // { limit }
-      return `${path}: string ${value} length must ${err.keyword == 'maxLength' ? 'not exceed' : 'be at least'} ${err.params.limit} characters`;
-
+      return `${path}: string ${value} length must ${err.keyword === 'maxLength' ? 'not exceed' : 'be at least'} ${err.params.limit} characters`;
     case 'additionalProperties':
-      // { additionalProperty }
       return `${path}: unknown additional property "${err.params.additionalProperty}"`;
-
     default:
-      // fallback to Ajv’s own message
       return `${path}: ${err.message} (value: ${value})`;
   }
 }
 
-// one Ajv instance = many files
+// Shared Ajv instance
 const ajv = new Ajv2020({ allErrors: true, strict: false, verbose: true });
 addFormats(ajv);
 
-// Validate one FDL file. Returns number of errors (0 == success)
-export async function validateFdlFile (filename, { verbose = true } = {}) {
-  if (verbose) console.log(`===== Validating '${filename}' =====`);
-  let errors = 0;
+// Validate FDL file contents (already parsed JSON).
+export function validateFdlObject(fdl, { verbose = true } = {}) {
+  // Setup
+  const errors = [];
 
-  let fdl;
-  try {
-    fdl = JSON.parse(await fs.readFile(filename, 'utf8'));
-  } catch (error) {
-    console.error(`JSON Decode Error: ${error.message}`);
-    return 1;
-  }
-
+  // Get version and validator for version
   const { version } = fdl;
+  if (verbose) console.log(`FDL Spec version ${version.major}.${version.minor} detected`);
   const validate = pickValidator(version);
 
+  // No schema found for version
   if (!validate) {
-    console.error(`No schema for version ${version.major}.${version.minor}`);
-    return 1;
+    if (verbose) console.error(`No schema for version ${version?.major}.${version?.minor}`);
+    errors.push(`No schema for version ${version?.major}.${version?.minor}`);
+    return {version, errors};
   }
 
+  // Errors in schema validation
   if (!validate(fdl)) {
-    for (const err of validate.errors) console.error(formatAjvError(err));
-    return validate.errors.length;
+    for (const err of validate.errors) {
+      if (verbose) console.error(formatAjvError(err));
+      errors.push(formatAjvError(err));
+    }
   }
 
+  // Errors in ID Tree
   try {
     validateIdTree(fdl);
   } catch (error) {
-    console.error(`ID Tree Error: ${error.message}`);
-    errors += 1;
+    if (verbose) console.error(`ID Tree Error: ${error.message}`);
+    errors.push(`ID Tree Error: ${error.message}`);
   }
-  return errors;
+
+  // Return version and errors
+  return {version, errors};
+}
+
+// Validate FDL file from a string.
+export function validateFdlContent(content, { verbose = true } = {}) {
+  // Setup
+  let fdl;
+
+  // Catch errors
+  try {
+    // Get JS object from FDL JSON
+    fdl = JSON.parse(content);
+  } catch (error) {
+    if (verbose) console.error(`JSON Decode Error: ${error.message}`);
+    return {version: null, errors: [`JSON Decode Error: ${error.message}`]};
+  }
+
+  // Validate FDL as JS Object
+  return validateFdlObject(fdl, { verbose });
+}
+
+// Node-only convenience function: validate by filename.
+export async function validateFdlFile(filename, { verbose = true } = {}) {
+  // Import node:fs/promises
+  const fs = await import('node:fs/promises');
+
+  // Read in file
+  const content = await fs.readFile(filename, 'utf8');
+  if (verbose) console.log(`===== Validating '${filename}' =====`);
+
+  // Validate the content
+  return validateFdlContent(content, { verbose });
 }

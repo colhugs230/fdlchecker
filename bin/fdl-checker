@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { validateFdlFile } from '../src/validator.mjs';
+import { validateFdlFile, validateFdlContent } from '../src/validator.mjs';
 
 const program = new Command();
 program
@@ -10,7 +10,10 @@ program
   .parse(process.argv);
 
 let total = 0;
-for (const file of program.args) total += await validateFdlFile(file);
+for (const file of program.args) {
+  const {version, errors} = await validateFdlFile(file);
+  total += errors.length;
+}
 
 // Log message
 if (total == 0) {

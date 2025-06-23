@@ -1,0 +1,110 @@
+{
+  "uuid": "76923312-b745-4d22-8ad5-bfa14beb917f",
+  "version": {
+    "major": 1,
+    "minor": 0
+  },
+  "fdl_creator": "Light Iron Galixy",
+  "framing_intents": [
+    {
+      "label": "2-1 Framing",
+      "id": "LIGALIXY",
+      "aspect_ratio": {
+        "width": 2,
+        "height": 1
+      },
+      "is_primary": true,
+      "protection": 0.1
+    }
+  ],
+  "contexts": [
+    {
+      "label": "DXL2",
+      "context_creator": "Light Iron Galixy",
+      "canvases": [
+        {
+          "label": "FF",
+          "id": "1c8c1e6b-bb99-49f0-832d-4cfc5297aff5",
+          "source_canvas_id": null,
+          "dimensions": {
+            "width": 8192,
+            "height": 4320
+          },
+          "effective_dimensions": {
+            "width": null,
+            "height": null
+          },
+          "effective_anchor_point": {
+            "x": 0,
+            "y": 0
+          },
+          "anamorphic_squeeze": 1,
+          "framing_decisions": [
+            {
+              "id": "2-1Framing",
+              "framing_intent_id": "2-1Framing",
+              "framing_intent_label": "DXL2-FF-2-1",
+              "anchor_point": {
+                "x": 409.5999999999999,
+                "y": 316.79999999999995
+              },
+              "dimensions": {
+                "width": 7372.8,
+                "height": 3686.4
+              },
+              "protection_dimensions": {
+                "width": 8192,
+                "height": 4096
+              },
+              "protection_anchor_point": {
+                "x": 0,
+                "y": 112
+              }
+            }
+          ]
+        },
+        {
+          "label": "FHD",
+          "id": "b8be895a-58a3-474e-8797-d6c8f86bc5c3",
+          "source_canvas_id": null,
+          "dimensions": {
+            "width": 1920,
+            "height": 1080
+          },
+          "effective_dimensions": {
+            "width": null,
+            "height": null
+          },
+          "effective_anchor_point": {
+            "x": 0,
+            "y": 0
+          },
+          "anamorphic_squeeze": 1,
+          "framing_decisions": [
+            {
+              "id": "2-1Framing",
+              "framing_intent_id": "2-1Framing",
+              "framing_intent_label": "DXL2-FHD-2-1",
+              "anchor_point": {
+                "x": 96,
+                "y": 108
+              },
+              "dimensions": {
+                "width": 1728,
+                "height": 864
+              },
+              "protection_dimensions": {
+                "width": 1920,
+                "height": 960
+              },
+              "protection_anchor_point": {
+                "x": 0,
+                "y": 60
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

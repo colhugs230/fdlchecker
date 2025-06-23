@@ -11,7 +11,7 @@
     "fdl-checker": "./bin/fdl-checker"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [
     "asc",
@@ -26,5 +26,9 @@
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.7.0"
   }
 }
