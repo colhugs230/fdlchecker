@@ -1,11 +1,14 @@
 {
   "name": "fdl-checker",
-  "version": "2.0.0",
+  "version": "3.0.0-beta.0",
   "description": "A node package for checking the validity of ASC FDL file's schema.",
   "type": "module",
   "exports": {
-    ".": "./src/validator.mjs",
-    "./package.json": "./package.json"
+    ".": {
+      "node": "./src/validator-node.mjs",
+      "import": "./src/validator-core.mjs",
+      "default": "./src/validator-core.mjs"
+    }
   },
   "bin": {
     "fdl-checker": "./bin/fdl-checker"

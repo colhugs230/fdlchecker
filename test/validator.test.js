@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { validateFdlFile, validateFdlContent, validateFdlObject } from '../src/validator.mjs';
+import { validateFdlContent, validateFdlObject } from '../src/validator-core.mjs';
+import { validateFdlFile } from '../src/validator-node.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
